@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GJ4 Accountability - Frontend Preview</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <main id="screen-splash" class="screen active">
+      <div class="splash-center">
+        <div class="splash-icon">GJ4</div>
+        <p class="splash-subtitle">Accountability together</p>
+      </div>
+    </main>
+    <main id="screen-login" class="screen">
+      <div class="login-form">
+        <h2>Sign in</h2>
+        <p class="muted">Use your account to continue</p>
+        <div class="field"><label>Your name</label><input id="login-name" type="text" placeholder="e.g. Rendell" value=""></div>
+        <div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div>
+        <div class="field"><label>Password</label><input type="password" placeholder="Password"></div>
+        <button class="btn primary" onclick="onLogin()">Sign in</button>
+        <button class="btn text" onclick="showScreen('screen-signup')">Sign up</button>
+      </div>
+    </main>
+    <main id="screen-signup" class="screen">
+      <header class="bar"><span class="back" onclick="showScreen('screen-login')">Back</span><h2>Sign up</h2></header>
+      <div class="login-form">
+        <div class="field"><label>Display name</label><input id="signup-name" type="text" placeholder="e.g. Rendell"></div>
+        <div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div>
+        <div class="field"><label>Password</label><input type="password" placeholder="6+ characters"></div>
+        <button class="btn primary" onclick="onSignup()">Create account</button>
+      </div>
+    </main>
+    <main id="screen-home" class="screen">
+      <header class="app-bar"><span class="app-bar-title">GJ4</span><button class="icon-btn">Settings</button></header>
+      <div class="home-content">
+        <h3 id="home-greeting">Hi, there</h3>
+        <div class="chip">5 day streak</div>
+        <section class="block">
+          <h4>Accountability partner</h4>
+          <p class="muted">Add a friend who gets notified when you exceed your limits.</p>
+          <button class="btn primary" onclick="showScreen('screen-add-partner')">Add partner</button>
+          <button class="btn outline">I have a code</button>
+        </section>
+        <section class="block">
+          <h4>Limits</h4>
+          <p class="muted">Set how long you can use apps before your partner is notified.</p>
+          <button class="btn outline" onclick="showScreen('screen-limits')">Manage limits</button>
+        </section>
+      </div>
+    </main>
+    <main id="screen-add-partner" class="screen">
+      <header class="bar"><span class="back" onclick="showScreen('screen-home')">Back</span><h2>Add partner</h2></header>
+      <div class="login-form">
+        <p class="muted">Share this code. Code expires in 10 minutes.</p>
+        <div class="code-box"><span class="code-digits">847291</span><button class="btn primary">Copy</button></div>
+      </div>
+    </main>
+    <main id="screen-limits" class="screen">
+      <header class="app-bar"><span class="back" onclick="showScreen('screen-home')">Back</span><span class="app-bar-title">Limits</span><button class="icon-btn" onclick="openAddLimitModal()">+ Add</button></header>
+      <div class="home-content">
+        <div id="limits-empty" class="empty-state">
+          <h4>No limits yet</h4>
+          <p class="muted">Add a limit. Your partner will receive the message you set.</p>
+          <button class="btn primary" onclick="openAddLimitModal()">Add limit</button>
+        </div>
+        <div id="limits-list" class="hidden"></div>
+      </div>
+    </main>
+  </div>
+
+  <div id="modal-add-limit" class="modal-overlay hidden">
+    <div class="modal">
+      <h3>Add limit</h3>
+      <div class="field"><label>App name</label><input id="limit-app" placeholder="e.g. Instagram"></div>
+      <div class="field"><label>Package / category</label><input id="limit-package" placeholder="com.instagram.android"></div>
+      <div class="field"><label>Minutes allowed</label><input id="limit-minutes" type="number" placeholder="30"></div>
+      <div class="field"><label>Window (minutes)</label><input id="limit-window" type="number" placeholder="180"></div>
+      <div class="field"><label>Message to partner</label><input id="limit-message" placeholder="has exceeded their time limit."></div>
+      <div class="modal-actions">
+        <button class="btn outline" onclick="closeAddLimitModal()">Cancel</button>
+        <button class="btn primary" onclick="addLimit()">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

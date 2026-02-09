@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="blocker_service_description">GJ4 uses this to detect when you open restricted apps and enforce your time limit. Your data stays on your device and in your Firebase; only your accountability partner is notified when you exceed the limit.</string>
+</resources>

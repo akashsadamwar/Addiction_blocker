@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GJ4 — Front end preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1B5E20;
+      --primary-container: #A5D6A7;
+      --on-primary: #fff;
+      --surface: #fafafa;
+      --on-surface: #1c1b1f;
+      --outline: #79747e;
+      --error-container: #fdeaea;
+      --on-error-container: #410e0b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--surface);
+      color: var(--on-surface);
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .screen { display: none; max-width: 480px; margin: 0 auto; }
+    .screen.active { display: block; }
+    h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 8px; color: var(--primary); }
+    h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; color: var(--primary); }
+    .muted { color: var(--outline); font-size: 0.875rem; margin-bottom: 24px; }
+    input, button {
+      font: inherit;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--outline);
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    button {
+      background: var(--primary);
+      color: var(--on-primary);
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    button:hover { filter: brightness(1.1); }
+    button.outline {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    .btn-row { display: flex; gap: 12px; margin-top: 16px; }
+    .btn-row button { flex: 1; }
+    .section { margin-bottom: 24px; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--primary-container);
+      color: var(--primary);
+      font-size: 0.875rem;
+      margin-bottom: 24px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--on-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-right: 12px;
+    }
+    .list-item { display: flex; align-items: center; padding: 12px 0; }
+    .list-item .name { font-weight: 500; }
+    .list-item .sub { font-size: 0.875rem; color: var(--outline); }
+    .appbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0 24px;
+      border-bottom: 1px solid #e0e0e0;
+      margin-bottom: 24px;
+    }
+    .appbar h1 { margin: 0; font-size: 1.25rem; }
+    .splash-center {
+      text-align: center;
+      padding: 48px 24px;
+    }
+    .splash-center .icon { font-size: 72px; margin-bottom: 24px; }
+    .splash-center h1 { letter-spacing: 4px; }
+    .error-box {
+      background: var(--error-container);
+      color: var(--on-error-container);
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 0.875rem;
+    }
+    .code-box {
+      background: #e8e8e8;
+      padding: 24px;
+      border-radius: 12px;
+      text-align: center;
+      margin: 16px 0;
+      font-size: 1.5rem;
+      letter-spacing: 12px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <!-- Splash -->
+  <div id="splash" class="screen active">
+    <div class="splash-center">
+      <div class="icon">🛡️</div>
+      <h1>GJ4</h1>
+      <p class="muted">Accountability together</p>
+      <button onclick="show('login')" style="margin-top: 24px;">Continue</button>
+    </div>
+  </div>
+
+  <!-- Login -->
+  <div id="login" class="screen">
+    <h1>Sign in</h1>
+    <p class="muted">Use your account to continue</p>
+    <form onsubmit="event.preventDefault(); show('home');">
+      <input type="email" placeholder="you@example.com" required>
+      <input type="password" placeholder="Password" required>
+      <button type="submit">Sign in</button>
+      <button type="button" class="outline" onclick="show('signup')">Don't have an account? Sign up</button>
+    </form>
+  </div>
+
+  <!-- Signup -->
+  <div id="signup" class="screen">
+    <h1>Sign up</h1>
+    <form onsubmit="event.preventDefault(); show('home');">
+      <input type="text" placeholder="Display name">
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password (6+ chars)" required>
+      <button type="submit">Create account</button>
+      <button type="button" class="outline" onclick="show('login')">Back to sign in</button>
+    </form>
+  </div>
+
+  <!-- Home -->
+  <div id="home" class="screen">
+    <div class="appbar">
+      <h1>GJ4</h1>
+      <button style="width: auto; padding: 8px 12px;" onclick="alert('Settings')">⚙️</button>
+    </div>
+    <h2>Hi, Alex</h2>
+    <div class="chip">🔥 5 day streak</div>
+    <div class="section">
+      <h2>Accountability partner</h2>
+      <p class="muted" style="margin-bottom: 12px;">Add a friend who gets notified when you exceed your limits.</p>
+      <button onclick="show('add-partner')">➕ Add partner</button>
+      <button class="outline" onclick="show('enter-code')" style="margin-top: 8px;">🔗 I have a code</button>
+    </div>
+    <div class="section">
+      <h2>Limits</h2>
+      <p class="muted" style="margin-bottom: 12px;">Set how long you can use apps before your partner is notified.</p>
+      <button class="outline" onclick="show('limits')">⏱️ Manage limits</button>
+    </div>
+  </div>
+
+  <!-- Home with partner (alternate) -->
+  <div id="home-with-partner" class="screen">
+    <div class="appbar">
+      <h1>GJ4</h1>
+      <button style="width: auto; padding: 8px 12px;" onclick="show('home')">⚙️</button>
+    </div>
+    <h2>Hi, Alex</h2>
+    <div class="section">
+      <h2>Accountability partner</h2>
+      <div class="card">
+        <div class="list-item">
+          <span class="avatar">S</span>
+          <div>
+            <div class="name">Sam</div>
+            <div class="sub">Connected</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <h2>Limits</h2>
+      <p class="muted" style="margin-bottom: 12px;">Set how long you can use apps before your partner is notified.</p>
+      <button class="outline" onclick="show('limits')">⏱️ Manage limits</button>
+    </div>
+    <button class="outline" onclick="show('home')">← Back to preview</button>
+  </div>
+
+  <!-- Add partner -->
+  <div id="add-partner" class="screen">
+    <h1>Add partner</h1>
+    <p class="muted">Share this code with your accountability partner. They enter it in the app to connect. Code expires in 10 minutes.</p>
+    <div class="code-box">847291</div>
+    <div class="btn-row">
+      <button>📋 Copy</button>
+      <button class="outline">New code</button>
+    </div>
+    <button class="outline" onclick="show('home')" style="margin-top: 16px;">← Back</button>
+  </div>
+
+  <!-- Enter code -->
+  <div id="enter-code" class="screen">
+    <h1>Enter code</h1>
+    <p class="muted">Enter the 6-digit code your friend shared with you.</p>
+    <input type="text" placeholder="000000" maxlength="6" style="text-align: center; letter-spacing: 8px; font-size: 1.25rem;">
+    <button onclick="show('home-with-partner')">Connect</button>
+    <button class="outline" onclick="show('home')">← Back</button>
+  </div>
+
+  <!-- Limits -->
+  <div id="limits" class="screen">
+    <div class="appbar">
+      <h1>Limits</h1>
+      <button style="width: auto; padding: 8px 12px;" onclick="alert('Add limit')">➕</button>
+    </div>
+    <p class="muted" style="margin-bottom: 24px;">No limits yet. Add a limit to get notified when you exceed it. Your partner will receive the message you set.</p>
+    <button onclick="alert('Add limit dialog')">➕ Add limit</button>
+    <button class="outline" onclick="show('home')" style="margin-top: 16px;">← Back</button>
+  </div>
+
+  <script>
+    function show(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      const el = document.getElementById(id);
+      if (el) el.classList.add('active');
+    }
+  </script>
+</body>
+</html>
